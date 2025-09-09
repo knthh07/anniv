@@ -35,7 +35,7 @@ export default function Home() {
     ];
 
     const [current, setCurrent] = useState(0);
-    const [step, setStep] = useState(0); // controls forgiveness sequence
+    const [step, setStep] = useState(0);
 
     const phrases = [
         "Will you forgive me?",
@@ -43,15 +43,16 @@ export default function Home() {
         "Give me another chance?",
     ];
 
+    // Background gradient colors
     const backgrounds = [
-        "from-gray-900 via-gray-800 to-black", // darkest
-        "from-gray-700 via-gray-600 to-gray-800", // medium
-        "from-rose-100 via-pink-100 to-rose-200", // light (reveal)
+        "linear-gradient(to bottom right, #111827, #1f2937, #000000)", // Darkest
+        "linear-gradient(to bottom right, #7f1d1d, #9f1239, #be185d)", // Deep rose
+        "linear-gradient(to bottom right, #ffe4e6, #fecdd3, #fbcfe8, #fda4af)", // Romantic pink
     ];
 
     const revealed = step >= phrases.length;
 
-    // start carousel auto-slide only after reveal
+    // Auto-slide carousel
     useEffect(() => {
         if (!revealed) return;
         const interval = setInterval(() => {
@@ -61,14 +62,43 @@ export default function Home() {
     }, [images.length, revealed]);
 
     return (
-        <div
-            className={`min-h-screen flex flex-col items-center justify-center transition-colors duration-1000 bg-gradient-to-br ${step < backgrounds.length ? backgrounds[step] : backgrounds[backgrounds.length - 1]
-                } relative overflow-hidden font-sans`}
+        <motion.div
+            initial={{ background: backgrounds[0] }}
+            animate={{
+                background:
+                    step < backgrounds.length
+                        ? backgrounds[step]
+                        : backgrounds[backgrounds.length - 1],
+            }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden font-sans"
         >
-            {/* subtle vignette for depth */}
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.35),rgba(0,0,0,0))]" />
+            {/* Spotify Playlist (shows after forgiveness sequence) */}
+            {revealed && (
+                <div className="absolute top-6 right-6 z-50">
+                    <div className="bg-white/80 backdrop-blur-lg border border-rose-200 shadow-2xl rounded-2xl overflow-hidden">
+                        <iframe
+                            className="rounded-2xl"
+                            src="https://open.spotify.com/embed/playlist/7gva5xxlRXedWjpsy4Gq9b?utm_source=generator&theme=0"
+                            width="320"
+                            height="152"
+                            frameBorder="0"
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy"
+                        ></iframe>
+                    </div>
+                </div>
+            )}
 
-            {/* Forgiveness sequence (dark -> lighter) */}
+            {/* Vignette (fades away when revealed) */}
+            <motion.div
+                initial={{ opacity: 1 }}
+                animate={{ opacity: revealed ? 0 : 1 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.35),rgba(0,0,0,0))]"
+            />
+
+            {/* Forgiveness sequence */}
             {!revealed ? (
                 <motion.div
                     key={`phrase-${step}`}
@@ -96,17 +126,21 @@ export default function Home() {
                         {step === 0 ? "Say it" : step === 1 ? "I'm sorry" : "Please"}
                     </motion.button>
 
-                    {/* hint */}
-                    <p className="mt-4 text-sm text-white/80">Click to move forward</p>
+                    <p className="mt-4 text-sm text-white/80">
+                        Click to move forward
+                    </p>
                 </motion.div>
             ) : (
                 <>
-                    {/* Soft floating hearts (subtle) */}
+                    {/* Floating hearts */}
                     {Array.from({ length: 6 }).map((_, i) => (
                         <motion.div
                             key={i}
                             className="absolute text-rose-300 text-xl opacity-70"
-                            initial={{ y: "110vh", x: Math.random() * window.innerWidth }}
+                            initial={{
+                                y: "110vh",
+                                x: Math.random() * window.innerWidth,
+                            }}
                             animate={{ y: "-15vh" }}
                             transition={{
                                 duration: 9 + Math.random() * 6,
@@ -118,14 +152,13 @@ export default function Home() {
                         </motion.div>
                     ))}
 
-                    {/* main content (fades in) */}
+                    {/* Main content */}
                     <motion.main
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="relative z-10 flex flex-col items-center px-6 text-center max-w-3xl py-12"
                     >
-                        {/* Header */}
                         <header className="mb-8">
                             <h1 className="font-['Great_Vibes'] text-5xl md:text-6xl text-rose-700 drop-shadow-sm">
                                 Our First Anniversary
@@ -138,52 +171,62 @@ export default function Home() {
                             </p>
                         </header>
 
-                        {/* Invitation card: elegant, letter-like */}
+                        {/* Invitation card */}
                         <motion.section
                             initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.15, duration: 0.6 }}
                             className="w-full max-w-2xl bg-gradient-to-br from-white via-rose-50 to-white 
-             backdrop-blur-md p-8 md:p-10 rounded-3xl shadow-xl border border-rose-100
-             relative overflow-hidden"
+                            backdrop-blur-md p-8 md:p-10 rounded-3xl shadow-xl border border-rose-100
+                            relative overflow-hidden"
                         >
-                            {/* Decorative top accent */}
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-transparent via-rose-400 to-transparent rounded-full mt-2" />
 
-                            {/* Message */}
                             <p className="text-lg md:text-xl text-gray-800 leading-relaxed italic text-center font-serif">
-                                “You are warmly invited to a special dinner to celebrate our first year together.
-                                We’d be honored if you could join us for an evening of quiet celebration and gratitude.”
+                                “Join me in a special dinner to celebrate our first year together.
+                                It would mean everything to me if you're with me on that night.”
                             </p>
 
-                            {/* Divider */}
                             <div className="my-6 flex items-center justify-center">
                                 <span className="h-px w-16 bg-rose-200" />
                                 <span className="mx-3 text-rose-400">❦</span>
                                 <span className="h-px w-16 bg-rose-200" />
                             </div>
 
-                            {/* Details + Button */}
                             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                                 <div className="text-left font-serif">
-                                    <h3 className="text-sm font-semibold tracking-wide text-rose-600 uppercase">Dinner Details</h3>
-                                    <p className="text-sm text-gray-700 mt-1">📍 Blackbird at the Nelson Tower</p>
-                                    <p className="text-sm text-gray-700">🕗 September 13, 2025 – 7:00 PM</p>
+                                    <h3 className="text-sm font-semibold tracking-wide text-rose-600 uppercase">
+                                        Dinner Details
+                                    </h3>
+                                    <p className="text-sm text-gray-700 mt-1">
+                                        📍 Blackbird at the Neilson Tower
+                                    </p>
+                                    <p className="text-sm text-gray-700">
+                                        🕗 September 13, 2025 – 7:00 PM
+                                    </p>
+                                    <p className="text-sm text-gray-700">
+                                        Departure time from home: 3:00 PM; We will go to Greenbelt 5 first to engrave the Guerlain Lippie
+                                    </p>
                                 </div>
 
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="px-8 py-3 rounded-full bg-rose-600 text-white text-sm md:text-base font-medium 
-                 shadow-md hover:bg-rose-700 transition tracking-wide"
+                                <a
+                                    href="https://www.blackbird.com.ph/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
-                                    RSVP Now
-                                </motion.button>
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="px-8 py-3 rounded-full bg-rose-600 text-white text-sm md:text-base font-medium 
+    shadow-md hover:bg-rose-700 transition tracking-wide"
+                                    >
+                                        Sneak Peek
+                                    </motion.button>
+                                </a>
+
                             </div>
                         </motion.section>
 
-
-                        {/* subtle divider */}
                         <div className="w-24 h-px bg-gradient-to-r from-transparent via-rose-200 to-transparent my-8" />
 
                         {/* Carousel */}
@@ -201,13 +244,14 @@ export default function Home() {
                                 />
                             </AnimatePresence>
 
-                            {/* dots */}
                             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                                 {images.map((_, i) => (
                                     <button
                                         key={i}
                                         onClick={() => setCurrent(i)}
-                                        className={`w-3 h-3 rounded-full transition ${i === current ? "bg-rose-600" : "bg-white/80"
+                                        className={`w-3 h-3 rounded-full transition ${i === current
+                                            ? "bg-rose-600"
+                                            : "bg-white/80"
                                             }`}
                                     />
                                 ))}
@@ -216,6 +260,6 @@ export default function Home() {
                     </motion.main>
                 </>
             )}
-        </div>
+        </motion.div>
     );
 }

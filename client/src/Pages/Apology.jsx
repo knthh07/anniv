@@ -21,6 +21,8 @@ export default function Apology() {
         <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
           Baby, I messed up and I know you must’ve been really hurt.
           I said some very hurtful words. Doubting your love for me was the worst thing I could have done.
+          I saw everything that you did for me and I forgot all about it just because I was feeling insecure.
+          I’m so sorry for making you feel unappreciated.
           If you can still find it in your heart to forgive me, I promise to make it up to you.
         </p>
 
