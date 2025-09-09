@@ -164,7 +164,7 @@ export default function Home() {
                                 Our First Anniversary
                             </h1>
                             <p className="mt-3 text-xl md:text-2xl font-medium text-gray-800">
-                                Prince <span className="text-rose-500">&</span> Shaine
+                                Kenneth <span className="text-rose-500">&</span> Shaine
                             </p>
                             <p className="mt-1 text-sm md:text-base text-gray-600 italic">
                                 September 13, 2025
@@ -176,32 +176,34 @@ export default function Home() {
                             initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.15, duration: 0.6 }}
-                            className="w-full max-w-2xl bg-gradient-to-br from-white via-rose-50 to-white 
-                            backdrop-blur-md p-8 md:p-10 rounded-3xl shadow-xl border border-rose-100
-                            relative overflow-hidden"
+                            className="w-full max-w-4xl bg-gradient-to-br from-white via-rose-50 to-white 
+             backdrop-blur-md p-10 md:p-14 rounded-3xl shadow-xl border border-rose-100
+             relative overflow-hidden"
                         >
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-transparent via-rose-400 to-transparent rounded-full mt-2" />
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-1 
+                  bg-gradient-to-r from-transparent via-rose-400 to-transparent 
+                  rounded-full mt-2" />
 
-                            <p className="text-lg md:text-xl text-gray-800 leading-relaxed italic text-center font-serif">
+                            <p className="text-xl md:text-2xl text-gray-800 leading-relaxed italic text-center font-serif">
                                 “Join me in a special dinner to celebrate our first year together.
                                 It would mean everything to me if you're with me on that night.”
                             </p>
 
-                            <div className="my-6 flex items-center justify-center">
-                                <span className="h-px w-16 bg-rose-200" />
+                            <div className="my-8 flex items-center justify-center">
+                                <span className="h-px w-20 bg-rose-200" />
                                 <span className="mx-3 text-rose-400">❦</span>
-                                <span className="h-px w-16 bg-rose-200" />
+                                <span className="h-px w-20 bg-rose-200" />
                             </div>
 
-                            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                                 <div className="text-left font-serif">
                                     <h3 className="text-sm font-semibold tracking-wide text-rose-600 uppercase">
                                         Dinner Details
                                     </h3>
-                                    <p className="text-sm text-gray-700 mt-1">
+                                    <p className="text-base text-gray-700 mt-1">
                                         📍 Blackbird at the Neilson Tower
                                     </p>
-                                    <p className="text-sm text-gray-700">
+                                    <p className="text-base text-gray-700">
                                         🕗 September 13, 2025 – 7:00 PM
                                     </p>
                                     <p className="text-sm text-gray-700">
@@ -217,17 +219,16 @@ export default function Home() {
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className="px-8 py-3 rounded-full bg-rose-600 text-white text-sm md:text-base font-medium 
+                                        className="px-12 py-2 rounded-full bg-rose-600 text-white text-sm md:text-base font-medium 
     shadow-md hover:bg-rose-700 transition tracking-wide"
                                     >
                                         Sneak Peek
                                     </motion.button>
                                 </a>
-
                             </div>
                         </motion.section>
 
-                        <div className="w-24 h-px bg-gradient-to-r from-transparent via-rose-200 to-transparent my-8" />
+                        <div className="w-32 h-px bg-gradient-to-r from-transparent via-rose-200 to-transparent my-10" />
 
                         {/* Carousel */}
                         <div className="w-full max-w-3xl aspect-[16/9] rounded-xl overflow-hidden shadow-lg relative">
