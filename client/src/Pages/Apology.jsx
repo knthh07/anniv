@@ -21,11 +21,11 @@ export default function Apology() {
         <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
           Baby, I messed up and I know you must’ve been really hurt.
           I said some very hurtful words. Doubting your love for me was the worst thing I could have done.
+          If you can still find it in your heart to forgive me, I promise to make it up to you.
         </p>
 
         <p className="mt-6 text-lg md:text-xl text-gray-600 italic">
-          Please forgive me. I don’t want this fight to stand between us.
-          I love you, and I want to make things right. ❤️
+          I love you ❤️
         </p>
 
         {/* Button */}
@@ -35,7 +35,7 @@ export default function Apology() {
           onClick={() => navigate("/home")}
           className="mt-10 px-8 py-3 rounded-lg bg-rose-600 text-white text-lg font-medium shadow-md hover:bg-rose-700 transition"
         >
-          Go to Our Anniversary Page
+          Will you forgive me?
         </motion.button>
       </motion.div>
     </div>
