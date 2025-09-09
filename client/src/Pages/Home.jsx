@@ -36,6 +36,7 @@ export default function Home() {
 
     const [current, setCurrent] = useState(0);
     const [step, setStep] = useState(0);
+    const [spotifyOpen, setSpotifyOpen] = useState(false); // ✅ add this
 
     const phrases = [
         "Will you forgive me?",
@@ -73,22 +74,6 @@ export default function Home() {
             transition={{ duration: 1.2, ease: "easeInOut" }}
             className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden font-sans"
         >
-            {/* Spotify Playlist (shows after forgiveness sequence) */}
-            {revealed && (
-                <div className="absolute top-6 right-6 z-50">
-                    <div className="bg-white/80 backdrop-blur-lg border border-rose-200 shadow-2xl rounded-2xl overflow-hidden">
-                        <iframe
-                            className="rounded-2xl"
-                            src="https://open.spotify.com/embed/playlist/7gva5xxlRXedWjpsy4Gq9b?utm_source=generator&theme=0"
-                            width="320"
-                            height="152"
-                            frameBorder="0"
-                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                            loading="lazy"
-                        ></iframe>
-                    </div>
-                </div>
-            )}
 
             {/* Vignette (fades away when revealed) */}
             <motion.div
@@ -151,6 +136,47 @@ export default function Home() {
                             ❤️
                         </motion.div>
                     ))}
+
+                    {/* Spotify Toggle Button (mobile only) */}
+                    <button
+                        className="fixed bottom-6 right-6 z-50 md:hidden bg-rose-600 text-white p-3 rounded-full shadow-lg"
+                        onClick={() => setSpotifyOpen((prev) => !prev)}
+                    >
+                        {spotifyOpen ? "✕" : "🎵"}
+                    </button>
+
+                    {/* Spotify Player */}
+                    {revealed && (
+                        <>
+                            {/* Desktop player */}
+                            <div className="hidden md:block absolute top-6 right-6 z-50">
+                                <div className="bg-white/80 backdrop-blur-lg border border-rose-200 shadow-2xl rounded-2xl overflow-hidden">
+                                    <iframe
+                                        className="rounded-2xl"
+                                        src="https://open.spotify.com/embed/playlist/7gva5xxlRXedWjpsy4Gq9b?utm_source=generator&theme=0"
+                                        width="320"
+                                        height="152"
+                                        frameBorder="0"
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                        loading="lazy"
+                                    ></iframe>
+                                </div>
+                            </div>
+
+                            {/* Mobile player */}
+                            {spotifyOpen && (
+                                <div className="fixed bottom-20 right-4 left-4 z-50 md:hidden bg-white/90 backdrop-blur-lg border border-rose-200 shadow-2xl rounded-2xl overflow-hidden p-2">
+                                    <iframe
+                                        className="rounded-2xl w-full h-40"
+                                        src="https://open.spotify.com/embed/playlist/7gva5xxlRXedWjpsy4Gq9b?utm_source=generator&theme=0"
+                                        frameBorder="0"
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                        loading="lazy"
+                                    ></iframe>
+                                </div>
+                            )}
+                        </>
+                    )}
 
                     {/* Main content */}
                     <motion.main

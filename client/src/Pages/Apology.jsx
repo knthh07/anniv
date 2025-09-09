@@ -23,6 +23,8 @@ export default function Apology() {
           I said some very hurtful words. Doubting your love for me was the worst thing I could have done.
           I saw everything that you did for me and I forgot all about it just because I was feeling insecure.
           I’m so sorry for making you feel unappreciated.
+          I also messed up by liking those pictures. There's no excuse for that.
+          I should have been more thoughtful and considerate of your feelings.
           If you can still find it in your heart to forgive me, I promise to make it up to you.
         </p>
 
