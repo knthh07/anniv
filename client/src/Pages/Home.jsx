@@ -139,7 +139,7 @@ export default function Home() {
 
                     {/* Desktop Spotify Player */}
                     {revealed && (
-                        <div className="hidden md:block absolute top-6 right-6 z-50">
+                        <div className="hidden lg:block absolute top-6 right-6 z-50">
                             <div className="bg-white/80 backdrop-blur-lg border border-rose-200 shadow-2xl rounded-2xl overflow-hidden">
                                 <iframe
                                     className="rounded-2xl"
@@ -156,7 +156,15 @@ export default function Home() {
 
                     {/* Mobile Spotify Button */}
                     <button
-                        className="fixed bottom-6 right-6 z-50 md:hidden bg-rose-600 text-white p-3 rounded-full shadow-lg"
+                        className="fixed bottom-6 right-6 z-50 lg:hidden bg-rose-600 text-white p-3 rounded-full shadow-lg"
+                        onClick={() => setSpotifyOpen((prev) => !prev)}
+                    >
+                        {spotifyOpen ? "✕" : "🎵"}
+                    </button>
+
+                    {/* Mobile Spotify Button */}
+                    <button
+                        className="fixed bottom-6 right-6 z-50 lg:hidden bg-rose-600 text-white p-3 rounded-full shadow-lg"
                         onClick={() => setSpotifyOpen((prev) => !prev)}
                     >
                         {spotifyOpen ? "✕" : "🎵"}
@@ -166,11 +174,11 @@ export default function Home() {
                     <motion.div
                         initial={{ y: 300, opacity: 0 }}
                         animate={{
-                            y: spotifyOpen ? 0 : 300,
+                            y: spotifyOpen ? -200 : 300, // ⬅ move high enough above the button
                             opacity: spotifyOpen ? 1 : 0,
                         }}
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/90 backdrop-blur-lg border-t border-rose-200 shadow-2xl overflow-hidden p-2"
+                        className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white/90 backdrop-blur-lg border-t border-rose-200 shadow-2xl overflow-hidden p-2"
                     >
                         <iframe
                             className="rounded-2xl w-full h-40"
