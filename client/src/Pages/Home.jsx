@@ -137,7 +137,24 @@ export default function Home() {
                         </motion.div>
                     ))}
 
-                    {/* Spotify Toggle Button (mobile only) */}
+                    {/* Desktop Spotify Player */}
+                    {revealed && (
+                        <div className="hidden md:block absolute top-6 right-6 z-50">
+                            <div className="bg-white/80 backdrop-blur-lg border border-rose-200 shadow-2xl rounded-2xl overflow-hidden">
+                                <iframe
+                                    className="rounded-2xl"
+                                    src="https://open.spotify.com/embed/playlist/7gva5xxlRXedWjpsy4Gq9b?utm_source=generator&theme=0"
+                                    width="320"
+                                    height="152"
+                                    frameBorder="0"
+                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                    loading="lazy"
+                                ></iframe>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Mobile Spotify Button */}
                     <button
                         className="fixed bottom-6 right-6 z-50 md:hidden bg-rose-600 text-white p-3 rounded-full shadow-lg"
                         onClick={() => setSpotifyOpen((prev) => !prev)}
@@ -145,38 +162,24 @@ export default function Home() {
                         {spotifyOpen ? "✕" : "🎵"}
                     </button>
 
-                    {/* Spotify Player */}
-                    {revealed && (
-                        <>
-                            {/* Desktop player */}
-                            <div className="hidden md:block absolute top-6 right-6 z-50">
-                                <div className="bg-white/80 backdrop-blur-lg border border-rose-200 shadow-2xl rounded-2xl overflow-hidden">
-                                    <iframe
-                                        className="rounded-2xl"
-                                        src="https://open.spotify.com/embed/playlist/7gva5xxlRXedWjpsy4Gq9b?utm_source=generator&theme=0"
-                                        width="320"
-                                        height="152"
-                                        frameBorder="0"
-                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                        loading="lazy"
-                                    ></iframe>
-                                </div>
-                            </div>
-
-                            {/* Mobile player */}
-                            {spotifyOpen && (
-                                <div className="fixed bottom-20 right-4 left-4 z-50 md:hidden bg-white/90 backdrop-blur-lg border border-rose-200 shadow-2xl rounded-2xl overflow-hidden p-2">
-                                    <iframe
-                                        className="rounded-2xl w-full h-40"
-                                        src="https://open.spotify.com/embed/playlist/7gva5xxlRXedWjpsy4Gq9b?utm_source=generator&theme=0"
-                                        frameBorder="0"
-                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                        loading="lazy"
-                                    ></iframe>
-                                </div>
-                            )}
-                        </>
-                    )}
+                    {/* Mobile Spotify Player (animated slide) */}
+                    <motion.div
+                        initial={{ y: 300, opacity: 0 }}
+                        animate={{
+                            y: spotifyOpen ? 0 : 300,
+                            opacity: spotifyOpen ? 1 : 0,
+                        }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/90 backdrop-blur-lg border-t border-rose-200 shadow-2xl overflow-hidden p-2"
+                    >
+                        <iframe
+                            className="rounded-2xl w-full h-40"
+                            src="https://open.spotify.com/embed/playlist/7gva5xxlRXedWjpsy4Gq9b?utm_source=generator&theme=0"
+                            frameBorder="0"
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy"
+                        ></iframe>
+                    </motion.div>
 
                     {/* Main content */}
                     <motion.main
